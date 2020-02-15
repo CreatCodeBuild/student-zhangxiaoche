@@ -27,14 +27,15 @@ func Search(logs, filter, separator string) (resultlist list.List) {
 		result := strings.Replace(string(contents), "\n", "", 1)
 		//按分割符分割字符串
 		section := strings.SplitAfter(result, separator)
-
+		fmt.Println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 		for i := 0; i < len(section); i++ {
 			if strings.Contains(section[i], filter) {
-				fmt.Println("----------------------------------------------------------------------")
+				fmt.Println("-------------------------------------")
 				fmt.Println(section[i])
 				resultlist.PushBack(section[i])
 			}
 		}
+		fmt.Println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 	}
 	return
 }

@@ -16,3 +16,13 @@ func TestSearch(t *testing.T) {
 		t.Errorf("Search(%s, %s) should be %s, but is:%s\n", a, b, shouldBe, r1)
 	}
 }
+func BenchmarkSearch(b *testing.B){
+	    a1 := "D:/MyProject/homework/search/ceshi.txt"
+    	b1 := "坑人"
+    	c1 := "，"
+
+	b.ResetTimer()
+	for i:=0;i<b.N;i++{
+		search.Search(a1, b1, c1)
+	}
+}

@@ -1,13 +1,18 @@
 package search
 
-import "fmt"
-import "io/ioutil"
-import "container/list"
-import "strings"
+import (
+	"container/list"
+	"fmt"
+	"io"
+	"io/ioutil"
+	"strings"
+)
 
-func Search(logs, filter, separator string) (resultlist list.List) {
+// Search x
+func Search(logs io.ReadCloser, filter, separator string) (resultlist list.List) {
 
-	if logs == "" {
+	contents, err := ioutil.ReadAll(logs)
+	if string(contents) == "" {
 		fmt.Println("未输入日志文件路径")
 		return
 	}
@@ -21,7 +26,6 @@ func Search(logs, filter, separator string) (resultlist list.List) {
 	}
 	//fmt.Println(logs,filter,separator)
 	fmt.Println("日志查找-结果：")
-	contents, err := ioutil.ReadFile(logs)
 	if err == nil {
 		//因为contents是[]byte类型，直接转换成string类型后会多一行空格,需要使用strings.Replace替换换行符
 		result := strings.Replace(string(contents), "\n", "", 1)

@@ -2,8 +2,10 @@ package search
 
 import (
 	"container/list"
+	"io/ioutil"
 	"os"
 	"reflect"
+	"strings"
 	"testing"
 )
 
@@ -19,6 +21,19 @@ func TestSearch(t *testing.T) {
 	r1 := real.Back().Value
 	if !reflect.DeepEqual(r1, shouldBe) {
 		t.Errorf("Search(%s, %s) should be %s, but is:%s\n", a, b, shouldBe, r1)
+	}
+}
+
+func TestSearch2(t *testing.T) {
+	a := "./ceshi.txt"
+	b := "坑人"
+	c := "，"
+	var real list.List
+
+	real = Search(ioutil.NopCloser(strings.NewReader(a)), b, c)
+	r1 := real.Back()
+	if r1 != nil {
+		t.Error("Should not find result")
 	}
 }
 
